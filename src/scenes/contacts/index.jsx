@@ -1,9 +1,10 @@
 import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
-import { useTheme } from "@mui/material";
+import { useTheme, Typography } from "@mui/material";
+import { fetchContacts } from "../../queries";
+import { useCustomQuery } from "../../hooks";
 
 const Contacts = () => {
   const theme = useTheme();
@@ -52,6 +53,19 @@ const Contacts = () => {
     },
   ];
 
+  const { data, isLoading, isError, error } = useCustomQuery({
+    queryKey: "contacts",
+    fetcherFn: fetchContacts,
+  });
+
+  if (isLoading) {
+    return <Typography variant="h2">Loading...</Typography>;
+  }
+
+  if (isError) {
+    return <Typography variant="h2">{error.message}</Typography>;
+  }
+
   return (
     <Box m="20px">
       <Header
@@ -91,7 +105,7 @@ const Contacts = () => {
         }}
       >
         <DataGrid
-          rows={mockDataContacts}
+          rows={data.contacts}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />

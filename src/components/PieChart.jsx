@@ -1,14 +1,29 @@
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
-import { useTheme } from "@mui/material";
-import { mockPieData as data } from "../data/mockData";
+import { useTheme, Typography } from "@mui/material";
+import { fetchPie } from "../queries";
+import { useCustomQuery } from "../hooks";
 
 const PieChart = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const { data, isLoading, isError, error } = useCustomQuery({
+    queryKey: "pie",
+    fetcherFn: fetchPie,
+  });
+
+  if (isLoading) {
+    return <Typography variant="h2">Loading...</Typography>;
+  }
+
+  if (isError) {
+    return <Typography variant="h2">{error.message}</Typography>;
+  }
+
   return (
     <ResponsivePie
-      data={data}
+      data={data.pie}
       theme={{
         axis: {
           domain: {

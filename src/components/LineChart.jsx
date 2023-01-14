@@ -1,15 +1,29 @@
 import { ResponsiveLine } from "@nivo/line";
-import { useTheme } from "@mui/material";
+import { useTheme, Typography } from "@mui/material";
 import { tokens } from "../theme";
-import { mockLineData as data } from "../data/mockData";
+import { fetchLine } from "../queries";
+import { useCustomQuery } from "../hooks";
 
 const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const { data, isLoading, isError, error } = useCustomQuery({
+    queryKey: "line",
+    fetcherFn: fetchLine,
+  });
+
+  if (isLoading) {
+    return <Typography variant="h2">Loading...</Typography>;
+  }
+
+  if (isError) {
+    return <Typography variant="h2">{error.message}</Typography>;
+  }
+
   return (
     <ResponsiveLine
-      data={data}
+      data={data.line}
       theme={{
         axis: {
           domain: {

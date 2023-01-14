@@ -1,15 +1,43 @@
-import { useTheme } from "@mui/material";
+import { useTheme, Typography } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
-import { geoFeatures } from "../data/mockGeoFeatures";
 import { tokens } from "../theme";
-import { mockGeographyData as data } from "../data/mockData";
+import { fetchGeography, fetchGeoFeatures } from "../queries";
+import { useCustomQuery } from "../hooks";
 
 const GeographyChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const { data, isLoading, isError, error } = useCustomQuery({
+    queryKey: "geography",
+    fetcherFn: fetchGeography,
+  });
+
+  const {
+    data: geo,
+    isLoading: geoIsLoading,
+    isError: geoIsError,
+    error: geoError,
+  } = useCustomQuery({
+    queryKey: "geoFeatures",
+    fetcherFn: fetchGeoFeatures,
+  });
+
+  if (isLoading || geoIsLoading) {
+    return <Typography variant="h2">Loading...</Typography>;
+  }
+
+  if (isError || geoIsError) {
+    return isError ? (
+      <Typography variant="h2">{error.message}</Typography>
+    ) : (
+      <Typography variant="h2">{geoError.message}</Typography>
+    );
+  }
+
   return (
     <ResponsiveChoropleth
-      data={data}
+      data={data.geography}
       theme={{
         axis: {
           domain: {
@@ -38,7 +66,7 @@ const GeographyChart = ({ isDashboard = false }) => {
           },
         },
       }}
-      features={geoFeatures.features}
+      features={geo.geoFeatures.features}
       margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
       domain={[0, 1000000]}
       unknownColor="#666666"
