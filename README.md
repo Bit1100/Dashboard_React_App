@@ -1,8 +1,7 @@
 # Admin Dashboard React App Introduction:
 
-          This app is a dashboard app based on ReactJs and other useful libraries. It generates the
-
-insights about the overall business stuffs such as traffics, revenue generated, acquired new clients, products sales and tons of other stuffs pertaining to business. Admin can even handle the teams via the app.
+This app is a dashboard app based on ReactJs and other useful libraries. It generates the
+insights about the overall business stuffs such as traffics, revenue generated, acquired new clients,products sales and tons of other stuffs pertaining to business. Admin can even handle the teams via the app.
 
 ## App Features
 
