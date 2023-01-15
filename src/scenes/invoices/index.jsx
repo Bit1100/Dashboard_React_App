@@ -1,8 +1,9 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../components/Header";
+import { fetchInvoices } from "../../queries";
+import { useCustomQuery } from "../../hooks";
 
 const Invoices = () => {
   const theme = useTheme();
@@ -42,6 +43,19 @@ const Invoices = () => {
     },
   ];
 
+  const { data, isLoading, isError, error } = useCustomQuery({
+    queryKey: "invoices",
+    fetcherFn: fetchInvoices,
+  });
+
+  if (isLoading) {
+    return <Typography variant="h2">Loading...</Typography>;
+  }
+
+  if (isError) {
+    return <Typography variant="h2">{error.message}</Typography>;
+  }
+
   return (
     <Box m="20px">
       <Header title="INVOICES" subtitle="List of Invoice Balances" />
@@ -74,7 +88,7 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        <DataGrid checkboxSelection rows={data.invoices} columns={columns} />
       </Box>
     </Box>
   );

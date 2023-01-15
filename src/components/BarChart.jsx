@@ -1,15 +1,29 @@
-import { useTheme } from "@mui/material";
+import { useTheme, Typography } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
-import { mockBarData as data } from "../data/mockData";
+import { fetchBar } from "../queries";
+import { useCustomQuery } from "../hooks";
 
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const { data, isLoading, isError, error } = useCustomQuery({
+    queryKey: "bar",
+    fetcherFn: fetchBar,
+  });
+
+  if (isLoading) {
+    return <Typography variant="h2">Loading...</Typography>;
+  }
+
+  if (isError) {
+    return <Typography variant="h2">{error.message}</Typography>;
+  }
+
   return (
     <ResponsiveBar
-      data={data}
+      data={data.bar}
       theme={{
         axis: {
           domain: {

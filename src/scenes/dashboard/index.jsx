@@ -1,6 +1,9 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
+import { fetchTransactions } from "../../queries";
+import { useCustomQuery } from "../../hooks";
+
+// Icons
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
@@ -16,6 +19,23 @@ import ProgressCircle from "../../components/ProgressCircle";
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const onSuccess = (data) => console.log(data);
+  const onError = (error) => console.log(error.message);
+
+  const { data, isLoading, isError, error } = useCustomQuery({
+    queryKey: "transactions",
+    fetcherFn: fetchTransactions,
+    options: { onSuccess, onError },
+  });
+
+  if (isLoading) {
+    return <Typography variant="h2">Loading...</Typography>;
+  }
+
+  if (isError) {
+    return <Typography variant="h2">{error.message}</Typography>;
+  }
 
   return (
     <Box m="20px">
@@ -183,7 +203,7 @@ const Dashboard = () => {
               Recent Transactions
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {data?.transactions?.map((transaction, i) => (
             <Box
               key={`${transaction.txId}-${i}`}
               display="flex"
