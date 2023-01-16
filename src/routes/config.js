@@ -1,14 +1,14 @@
-import Dashboard from "../scenes/dashboard";
-import Team from "../scenes/team";
-import Invoices from "../scenes/invoices";
-import Contacts from "../scenes/contacts";
-import Bar from "../scenes/bar";
-import Form from "../scenes/form";
-import Line from "../scenes/line";
-import Pie from "../scenes/pie";
-import FAQ from "../scenes/faq";
-import Geography from "../scenes/geography";
-import Calendar from "../scenes/calendar";
+import Bar from "../pages/bar";
+import Calendar from "../pages/calendar";
+import Contacts from "../pages/contacts";
+import Dashboard from "../pages/dashboard";
+import FAQ from "../pages/faq";
+import Form from "../pages/form";
+import Geography from "../pages/geography";
+import Invoices from "../pages/invoices";
+import Line from "../pages/line";
+import Pie from "../pages/pie";
+import Team from "../pages/team";
 
 export const routes = [
   { path: "/", element: <Dashboard /> },
