@@ -4,7 +4,7 @@ import { tokens } from "../../theme";
 import { Header } from "../../components/Global";
 import { fetchTeams } from "../../queries";
 import { useCustomQuery } from "../../hooks";
-import { Loader } from "../../components/Utiliities";
+import { Loader, ErrorPage } from "../../components/Utiliities";
 
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -81,7 +81,7 @@ const Team = () => {
   }
 
   if (isError) {
-    return <Typography variant="h2">{error.message}</Typography>;
+    return <ErrorPage error={error.message} />;
   }
 
   return (

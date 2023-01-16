@@ -1,9 +1,9 @@
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../../theme";
-import { useTheme, Typography } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { fetchPie } from "../../queries";
 import { useCustomQuery } from "../../hooks";
-import { Loader } from "../Utiliities";
+import { Loader, ErrorPage } from "../Utiliities";
 
 export const PieChart = () => {
   const theme = useTheme();
@@ -19,7 +19,7 @@ export const PieChart = () => {
   }
 
   if (isError) {
-    return <Typography variant="h2">{error.message}</Typography>;
+    return <ErrorPage error={error.message} />;
   }
 
   return (

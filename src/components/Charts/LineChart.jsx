@@ -1,9 +1,9 @@
 import { ResponsiveLine } from "@nivo/line";
-import { useTheme, Typography } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { fetchLine } from "../../queries";
 import { useCustomQuery } from "../../hooks";
-import { Loader } from "../Utiliities";
+import { Loader, ErrorPage } from "../Utiliities";
 
 export const LineChart = ({
   isCustomLineColors = false,
@@ -22,7 +22,7 @@ export const LineChart = ({
   }
 
   if (isError) {
-    return <Typography variant="h2">{error.message}</Typography>;
+    return <ErrorPage error={error.message} />;
   }
 
   return (

@@ -1,9 +1,9 @@
-import { useTheme, Typography } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../../theme";
 import { fetchBar } from "../../queries";
 import { useCustomQuery } from "../../hooks";
-import { Loader } from "../Utiliities";
+import { Loader, ErrorPage } from "../Utiliities";
 
 export const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
@@ -19,7 +19,7 @@ export const BarChart = ({ isDashboard = false }) => {
   }
 
   if (isError) {
-    return <Typography variant="h2">{error.message}</Typography>;
+    return <ErrorPage error={error.message} />;
   }
 
   return (

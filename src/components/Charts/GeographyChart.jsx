@@ -1,9 +1,9 @@
-import { useTheme, Typography } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { tokens } from "../../theme";
 import { fetchGeography, fetchGeoFeatures } from "../../queries";
 import { useQueries } from "react-query";
-import { Loader } from "../Utiliities";
+import { Loader, ErrorPage } from "../Utiliities";
 // import { useCustomQuery } from "../hooks";
 
 export const GeographyChart = ({ isDashboard = false }) => {
@@ -47,9 +47,9 @@ export const GeographyChart = ({ isDashboard = false }) => {
 
   if (isError || geoIsError) {
     return isError ? (
-      <Typography variant="h2">{error.message}</Typography>
+      <ErrorPage error={error.message} />
     ) : (
-      <Typography variant="h2">{geoError.message}</Typography>
+      <ErrorPage error={geoError.message} />
     );
   }
 

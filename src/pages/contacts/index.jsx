@@ -2,10 +2,10 @@ import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { Header } from "../../components/Global";
-import { useTheme, Typography } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { fetchContacts } from "../../queries";
 import { useCustomQuery } from "../../hooks";
-import { Loader } from "../../components/Utiliities";
+import { Loader, ErrorPage } from "../../components/Utiliities";
 
 const Contacts = () => {
   const theme = useTheme();
@@ -64,7 +64,7 @@ const Contacts = () => {
   }
 
   if (isError) {
-    return <Typography variant="h2">{error.message}</Typography>;
+    return <ErrorPage error={error.message} />;
   }
 
   return (

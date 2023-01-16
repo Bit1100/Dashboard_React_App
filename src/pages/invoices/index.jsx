@@ -4,7 +4,7 @@ import { tokens } from "../../theme";
 import { Header } from "../../components/Global";
 import { fetchInvoices } from "../../queries";
 import { useCustomQuery } from "../../hooks";
-import { Loader } from "../../components/Utiliities";
+import { Loader, ErrorPage } from "../../components/Utiliities";
 
 const Invoices = () => {
   const theme = useTheme();
@@ -54,7 +54,7 @@ const Invoices = () => {
   }
 
   if (isError) {
-    return <Typography variant="h2">{error.message}</Typography>;
+    return <ErrorPage error={error.message} />;
   }
 
   return (

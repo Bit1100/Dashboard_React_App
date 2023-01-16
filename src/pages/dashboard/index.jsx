@@ -4,14 +4,6 @@ import { fetchTransactions } from "../../queries";
 import { useCustomQuery } from "../../hooks";
 import { Loader, ErrorPage } from "../../components/Utiliities";
 import { Header } from "../../components/Global";
-
-// Icons
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
-
 import {
   LineChart,
   GeographyChart,
@@ -19,6 +11,13 @@ import {
   StatBox,
   ProgressCircle,
 } from "../../components/Charts";
+
+// Icons
+import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import EmailIcon from "@mui/icons-material/Email";
+import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import TrafficIcon from "@mui/icons-material/Traffic";
 
 const Dashboard = () => {
   const theme = useTheme();
