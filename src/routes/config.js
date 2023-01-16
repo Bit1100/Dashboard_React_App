@@ -9,6 +9,7 @@ import Invoices from "../pages/invoices";
 import Line from "../pages/line";
 import Pie from "../pages/pie";
 import Team from "../pages/team";
+import { ErrorPage } from "../components/Utiliities";
 
 export const routes = [
   { path: "/", element: <Dashboard /> },
@@ -22,4 +23,5 @@ export const routes = [
   { path: "/faq", element: <FAQ /> },
   { path: "/calendar", element: <Calendar /> },
   { path: "/geography", element: <Geography /> },
+  { path: "*", element: <ErrorPage /> },
 ];

@@ -17,7 +17,7 @@ export const ErrorPage = ({ error }) => {
       height="80vh"
     >
       <Typography variant="h2" color={colors.grey[200]}>
-        {error}
+        {error ? error : "ERROR 404 - Contents on this Route Not Found"}
       </Typography>
       <Button
         variant="contained"
